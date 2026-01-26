@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// const tracks = null;
+
+// const tracks = [];
+
+const tracks = [
+  {
+    id: 1,
+    title: "Vocal track",
+    url: "https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3",
+  },
+  {
+    id: 2,
+    title: "Instrumental track",
+    url: "https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3",
+  },
+];
+
+const trackSelectedId = 1;
 
 function App() {
-  const [count, setCount] = useState(0)
+  if (tracks === null) {
+    return (
+      <div>
+        <h1>Musicfun</h1>
+        <span>Loading...</span>
+      </div>
+    );
+  }
+
+  if (tracks.length === 0) {
+    return (
+      <div>
+        <h1>Musicfun</h1>
+        <span>No tracks</span>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Musicfun</h1>
+      <ul>
+        {tracks.map((track) => {
+          return (
+            <li
+              key={track.id}
+              style={{ border: track.id === trackSelectedId ? "2px solid black" : "none" }}
+            >
+              <div>{track.title}</div>
+              <audio controls src={track.url} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
