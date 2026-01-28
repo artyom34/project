@@ -1,6 +1,4 @@
-// const tracks = null;
-
-// const tracks = [];
+import { useState } from "react";
 
 const tracks = [
   {
@@ -15,9 +13,9 @@ const tracks = [
   },
 ];
 
-const trackSelectedId = 1;
-
 function App() {
+  const [trackSelectedId, setTrackSelectedId] = useState(null);
+
   if (tracks === null) {
     return (
       <div>
@@ -39,15 +37,25 @@ function App() {
   return (
     <div>
       <h1>Musicfun</h1>
+      <button onClick={() => setTrackSelectedId(null)}>reset selected</button>
       <ul>
         {tracks.map((track) => {
           return (
             <li
               key={track.id}
-              style={{ border: track.id === trackSelectedId ? "2px solid black" : "none" }}
+              style={{
+                border:
+                  track.id === trackSelectedId ? "1px solid black" : "none",
+              }}
             >
-              <div>{track.title}</div>
-              <audio controls src={track.url} />
+              <div
+                onClick={() => {
+                  setTrackSelectedId(track.id);
+                }}
+              >
+                {track.title}
+              </div>
+              <audio controls src={track.url}></audio>
             </li>
           );
         })}
