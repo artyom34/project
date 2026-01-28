@@ -14,7 +14,7 @@ const tracks = [
 ];
 
 function App() {
-  const [trackSelectedId, setTrackSelectedId] = useState(null);
+  const [trackSelectedId, setTrackSelectedId] = useState(null); // useState<number | null>(null);
 
   if (tracks === null) {
     return (
